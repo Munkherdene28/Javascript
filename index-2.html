@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flappy bird</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <script>
+      let container = document.createElement("div");
+      let ball = document.createElement("div");
+      let body = document.querySelector("body");
+      container.className = "container";
+      ball.className = "ball";
+      body.appendChild(container);
+      container.appendChild(ball);
+      let position = {
+        x: 0,
+        y: 0,
+        speed: 100,
+      };
+      let positionBlock = {
+        x: 0,
+      };
+      function createBlockElements(num) {
+        for (let i = 1; i <= num; i++) {
+          let blockContainer = document.createElement("div");
+          let blockTop = document.createElement("div");
+          let blockBottom = document.createElement("div");
+
+          blockTop.classList.add("block", "blocktopheight");
+          blockBottom.className = "block";
+          blockTop.className = "block";
+          blockBottom.className = "block";
+          blockContainer.classList.add("block-container");
+          blockContainer.appendChild(blockTop);
+          blockContainer.appendChild(blockBottom);
+          container.appendChild(blockContainer);
+
+          let topheight = Math.random() * window.innerHeight;
+        }
+      }
+      createBlockElements(6);
+      function moveBlocks() {
+        positionBlock.x = positionBlock.x + 100;
+        positionBlock[0] = positionBlock[0] + 200;
+        const blocks = document.getElementsByClassName("block-container");
+        for (let i = 0; i < positionBlock.length; i++) {}
+        if (positionBlock.x > window.innerWidth) {
+          positionBlock.x = 0;
+          blocks[0].remove();
+          createBlockElements(2);
+        }
+
+        for (let i = 0; i < blocks.length; i++) {
+          blocks[i].style.transform = `translate(-${positionBlock.x}px, 0px)`;
+        }
+      }
+      setInterval(moveBlocks, 200);
+      document.addEventListener("keypress", function (event) {
+        if (event.keyCode === 119) {
+          (position.y = position.y - 50), position.speed;
+        } else if (event.keyCode === 115) {
+          (position.y = position.y + 50), position.speed;
+        } else if (event.keyCode === 97) {
+          (position.x = position.x - 50), position.speed;
+        } else if (event.keyCode === 100) {
+          (position.x = position.x + 50), position.speed;
+          moveBlocks();
+        }
+        ball.style.transform = `translate(${position.x}px, ${position.y}px)`;
+      });
+    </script>
+  </body>
+</html>

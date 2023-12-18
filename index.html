@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const left = document.createElement("div");
+      const rigth = document.createElement("div");
+      const body = document.querySelector("body");
+
+      body.style.display = "flex";
+      body.style.margin = "0";
+      left.style.width = "50%";
+      rigth.style.width = "50%";
+      left.style.height = "100vh";
+      rigth.style.height = "100vh";
+
+      left.style.display = "flex";
+      left.style.justifyContent = "center";
+      left.style.alignItems = "center";
+      left.style.fontSize = "24px";
+
+      rigth.style.display = "flex";
+      rigth.style.justifyContent = "center";
+      rigth.style.alignItems = "center";
+      rigth.style.fontSize = "24px";
+
+      left.style.backgroundColor = "#363062";
+      rigth.style.backgroundColor = "#FBECB2";
+
+      left.innerText = left.style.width;
+      rigth.innerText = rigth.style.width;
+
+      body.appendChild(left);
+      body.appendChild(rigth);
+
+      document.addEventListener("keypress", function (event) {
+        if (event.keyCode === 32) {
+          addLeftWidth();
+        } else if (event.keyCode === 13) {
+          addRigthWidth();
+        }
+      });
+
+      left.addEventListener("click", addLeftWidth);
+      rigth.addEventListener("click", addRigthWidth);
+
+      function addLeftWidth() {
+        const divElements = document.querySelectorAll("div");
+        count = parseInt(divElements[0].style.width) + 1;
+        divElements[0].style.width = `${count}%`;
+        divElements[0].innerText = `${count}%`;
+        leftCount = `${parseInt(divElements[1].style.width) - 1}%`;
+        divElements[1].style.width = leftCount;
+        divElements[1].innerText = leftCount;
+        if (parseInt(divElements[0].style.width) === 101) {
+          alert("Purple won");
+        }
+        localStorage.setItem("count", Math.random());
+      }
+
+      function addRigthWidth() {
+        const divElements = document.querySelectorAll("div");
+        count = parseInt(divElements[1].style.width) + 1;
+        divElements[1].style.width = `${count}%`;
+        divElements[1].innerText = `${count}%`;
+        rightCount = `${parseInt(divElements[0].style.width) - 1}%`;
+        divElements[0].style.width = rightCount;
+        divElements[0].innerText = rightCount;
+        if (parseInt(divElements[1].style.width) === 101) {
+          alert("Yellow won");
+        }
+        localStorage.setItem("count", Math.random());
+      }
+    </script>
+  </body>
+</html>
